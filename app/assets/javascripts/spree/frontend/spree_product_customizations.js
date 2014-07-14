@@ -1,2 +1,2 @@
-// Placeholder manifest file.
-// the installer will append this file to the app vendored assets here: vendor/assets/javascripts/spree/frontend/all.js'
+//= require jquery.formatCurrency-1.4.0.min
+//= require i18n/jquery.formatCurrency.all
