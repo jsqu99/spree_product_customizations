@@ -25,7 +25,7 @@ module Spree
 
     def compute(product_customization, variant=nil)
       return 0 unless valid_configuration? product_customization
-
+binding.pry
       # expecting only one CustomizedProductOption
       opt = product_customization.customized_product_options.detect {|cpo| cpo.customizable_product_option.name == "amount" } rescue 0.0
       opt.value.to_i * preferred_multiplier

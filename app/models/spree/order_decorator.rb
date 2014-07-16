@@ -24,12 +24,20 @@ module Spree
       return true if existing_customizations.empty? && new_customizations.empty?
 
       # exact match of all customization types?
-      return false unless existing_customizations.map(&:product_customization_type_id).sort == new_customizations.map(&:product_customization_type_id).sort
+      return false unless existing_customizations.map(&:product_customization_type_id).sort == new_customizations.keys.map(&:to_i).sort
 
       # get a list of [customizable_product_option.id,value] pairs
       existing_vals = customization_pairs existing_customizations
-      new_vals      = customization_pairs new_customizations
+      new_vals      = new_customizations.values.each 
 
+      a = []
+      new_customizations.values.each do |ncv_hash| 
+        ncv_hash.keys.each do |key|
+          a<< [key.to_i, ncv_hash[key]]
+        end
+      end
+
+      new_vals = Set.new a
       # do a set-compare here
       existing_vals == new_vals
     end
